@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil Kelas Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: slideUp 0.4s ease-out; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: #e2e8f0;
+            border-radius: 10px;
+        }
+
+        .schedule-card {
+            transition: all 0.3s ease;
+        }
+        .schedule-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 pb-24 md:pb-8 md:pt-20">
+
+    <!-- Navigasi -->
+    <nav class="fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-xl border-t border-slate-200 z-50 md:top-0 md:bottom-auto md:border-b md:border-t-0">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <div class="hidden md:block font-extrabold text-xl text-blue-600 tracking-tight">CLASS<span class="text-slate-800">HUB.</span></div>
+                <div class="flex space-x-1 w-full md:w-auto justify-around">
+                    <button onclick="showTab('home')" class="nav-btn p-2 flex flex-col items-center text-blue-600 transition-all" id="btn-home">
+                        <i data-lucide="home" class="w-6 h-6"></i>
+                        <span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Beranda</span>
+                    </button>
+                    <button onclick="showTab('students')" class="nav-btn p-2 flex flex-col items-center text-slate-400 transition-all" id="btn-students">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                        <span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Murid</span>
+                    </button>
+                    <button onclick="showTab('schedule')" class="nav-btn p-2 flex flex-col items-center text-slate-400 transition-all" id="btn-schedule">
+                        <i data-lucide="calendar" class="w-6 h-6"></i>
+                        <span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Jadwal</span>
+                    </button>
+                    <button onclick="showTab('about')" class="nav-btn p-2 flex flex-col items-center text-slate-400 transition-all" id="btn-about">
+                        <i data-lucide="user-check" class="w-6 h-6"></i>
+                        <span class="text-[10px] font-bold mt-1 uppercase tracking-tighter">Pembuat</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto p-4">
+        
+        <!-- Tab: Beranda -->
+        <section id="home" class="tab-content active space-y-6">
+            <div class="bg-gradient-to-br from-indigo-600 via-blue-600 to-blue-500 rounded-[2.5rem] p-8 text-white shadow-2xl shadow-blue-200 relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="bg-white/20 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest">Tahun Ajaran 2025/2026</span>
+                    <h1 class="text-4xl font-black mt-4 mb-2">X-UPW (FOREVER!!)</h1>
+                    <p class="opacity-80 text-sm font-medium italic">"Berani berkarya,siap bersaing"</p>
+                    
+                    <div class="grid grid-cols-3 gap-4 mt-8">
+                        <div class="bg-black/10 backdrop-blur-md p-4 rounded-3xl border border-white/10 text-center">
+                            <div id="stat-total" class="text-2xl font-black">0</div>
+                            <div class="text-[9px] uppercase font-bold opacity-60">Siswa</div>
+                        </div>
+                        <div class="bg-black/10 backdrop-blur-md p-4 rounded-3xl border border-white/10 text-center">
+                            <div id="stat-male" class="text-2xl font-black text-blue-200">0</div>
+                            <div class="text-[9px] uppercase font-bold opacity-60">Pria</div>
+                        </div>
+                        <div class="bg-black/10 backdrop-blur-md p-4 rounded-3xl border border-white/10 text-center">
+                            <div id="stat-female" class="text-2xl font-black text-pink-200">0</div>
+                            <div class="text-[9px] uppercase font-bold opacity-60">Wanita</div>
+                        </div>
+                    </div>
+                </div>
+                <i data-lucide="layout" class="absolute -bottom-6 -right-6 w-32 h-32 text-white/10"></i>
+            </div>
+
+            <!-- Profil Guru -->
+            <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm flex items-center gap-5">
+                <div class="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center">
+                    <i data-lucide="graduation-cap" class="text-blue-600 w-8 h-8"></i>
+                </div>
+                <div>
+                    <h3 class="font-bold text-slate-800 text-lg leading-tight">Enur Komala Sari, M.Pd</h3>
+                    <p class="text-sm text-slate-500 font-medium">Wali Kelas / Guru Bahasa Indonesia</p>
+                    <div class="flex gap-2 mt-2">
+                        <span class="px-2 py-0.5 bg-slate-100 text-[9px] font-bold rounded-md text-slate-400">Komunikasi adalah kunci kesuksesan </span>
+                        
+                        
+                    </div>
+                    
+                </div>
+                
+            </div>
+            <div class="space-y-4">
+                <div class="flex items-center justify-between px-2">
+                    <h2 class="text-xl font-black text-slate-800 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="megaphone" class="lucide lucide-megaphone w-5 h-5 text-indigo-600"><path d="M11 6a13 13 0 0 0 8.4-2.8A1 1 0 0 1 21 4v12a1 1 0 0 1-1.6.8A13 13 0 0 0 11 14H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"></path><path d="M6 14a12 12 0 0 0 2.4 7.2 2 2 0 0 0 3.2-2.4A8 8 0 0 1 10 14"></path><path d="M8 6v8"></path></svg> Papan Informasi
+                    </h2>
+                    <span class="text-[10px] font-black text-indigo-600 bg-indigo-50 px-2 py-1 rounded-full uppercase">Update: Hari Ini</span>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <!-- Section: Tugas -->
+                    <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm info-card">
+                        <h3 class="font-black text-slate-800 mb-4 flex items-center gap-2 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="clipboard-list" class="lucide lucide-clipboard-list w-4 h-4 text-orange-500"><rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path><path d="M12 11h4"></path><path d="M12 16h4"></path><path d="M8 11h.01"></path><path d="M8 16h.01"></path></svg> Tugas Sekolah
+                        </h3>
+                        <div class="space-y-3">
+                            <div class="p-3 bg-orange-50 rounded-2xl border border-orange-100 flex items-center gap-3">
+                                <div class="w-8 h-8 bg-orange-500 text-white rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-xs font-black">MTK</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-700 leading-tight">Tugas Contoh Pekerjaan (Travel Consultant)</p>
+                                    <p class="text-[10px] font-bold text-orange-600 uppercase mt-0.5">Deadline: Besok, 11:20</p>
+                                </div>
+                            </div>
+                            <div class="p-3 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-3 opacity-80">
+                                <div class="w-8 h-8 bg-slate-400 text-white rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <span class="text-xs font-black">FIS</span>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-bold text-slate-700 leading-tight">Not Yet Compiled</p>
+                                    <p class="text-[10px] font-bold text-slate-500 uppercase mt-0.5">Deadline: ???</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section: Bawaan -->
+                    <div class="bg-white p-6 rounded-[2rem] border border-slate-100 shadow-sm info-card">
+                        <h3 class="font-black text-slate-800 mb-4 flex items-center gap-2 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="shopping-bag" class="lucide lucide-shopping-bag w-4 h-4 text-indigo-500"><path d="M16 10a4 4 0 0 1-8 0"></path><path d="M3.103 6.034h17.794"></path><path d="M3.4 5.467a2 2 0 0 0-.4 1.2V20a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6.667a2 2 0 0 0-.4-1.2l-2-2.667A2 2 0 0 0 17 2H7a2 2 0 0 0-1.6.8z"></path></svg> Perlengkapan Besok
+                        </h3>
+                        <div class="grid grid-cols-1 gap-2">
+                            <div class="flex items-center gap-3 p-3 border-b border-slate-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-square" class="lucide lucide-check-square w-4 h-4 text-indigo-600"><path d="M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                <span class="text-sm font-bold text-slate-700">Not Yet Compiled</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 border-b border-slate-50">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-square" class="lucide lucide-check-square w-4 h-4 text-indigo-600"><path d="M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                <span class="text-sm font-bold text-slate-700">Not Yet Compiled</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="check-square" class="lucide lucide-check-square w-4 h-4 text-slate-300"><path d="M21 10.656V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12.344"></path><path d="m9 11 3 3L22 4"></path></svg>
+                                <span class="text-sm font-bold text-slate-500 italic line-through">Sample Code (Not Yet Compiled)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tab: Murid -->
+        <section id="students" class="tab-content space-y-4">
+            <div class="flex items-center justify-between px-2">
+                <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Anggota Kelas</h2>
+            </div>
+            <div id="student-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4"></div>
+        </section>
+
+        <!-- Tab: Jadwal -->
+        <section id="schedule" class="tab-content space-y-8">
+            <div class="flex flex-col gap-2 px-2">
+                <h2 class="text-2xl font-black text-slate-800 uppercase tracking-tight">Jadwal Kelas</h2>
+                <p class="text-xs text-slate-500 font-medium italic">Jadwal resmi berlaku sejak Semester Genap.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Senin -->
+                <div class="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm schedule-card">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-600 rounded-xl flex items-center justify-center text-white">
+                                <i data-lucide="zap" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-black text-slate-800">Senin</h3>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded-lg">4 Mapel</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-blue-600 bg-blue-50 w-20 py-1 rounded-md text-center">07:00-08:00</span>
+                            <span class="text-sm font-bold text-slate-700">Upacara Bendera</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">08:00-09:40</span>
+                            <span class="text-sm font-bold text-slate-700">Informatika</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">09:40-10:00</span>
+                            <span class="text-sm font-bold text-amber-600 italic">Istirahat Pertama</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">10:00-11:20</span>
+                            <span class="text-sm font-bold text-slate-700">P5</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">11:20-12:00</span>
+                            <span class="text-sm font-bold text-slate-700">English Speaking</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">12:00-12:30</span>
+                            <span class="text-sm font-bold text-amber-600 italic">Istirahat Kedua</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">12:30-13:10</span>
+                            <span class="text-sm font-bold text-slate-700">English Speaking</span>
+                        </div>
+                        
+                                                <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">13:10-14:30</span>
+                            <span class="text-sm font-bold text-slate-700">Bahasa Prancis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Selasa -->
+                <div class="bg-white rounded-[2rem] p-6 border border-slate-100 shadow-sm schedule-card">
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white">
+                                <i data-lucide="wind" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="font-black text-slate-800">Selasa</h3>
+                        </div>
+                        <span class="text-[10px] font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded-lg">4 Mapel</span>
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">07:00-08:20</span>
+                            <span class="text-sm font-bold text-slate-700">M.I.C.E</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">08:20-09:40</span>
+                            <span class="text-sm font-bold text-slate-700">Sejarah</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">09:40-10:00</span>
+                            <span class="text-sm font-bold text-amber-600 italic">Istirahat Pertama</span>
+                        </div>
+                        <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">11:20-12:00</span>
+                            <span class="text-sm font-bold text-slate-700">Travel Consultant</span>
+                        </div>
+                                                <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">12:00-12:30</span>
+                            <span class="text-sm font-bold text-amber-600 italic">Istirahat Kedua</span>
+                        </div>
+                                                <div class="flex gap-4 items-start">
+                            <span class="text-[10px] font-black text-slate-400 bg-slate-50 w-20 py-1 rounded-md text-center">12:30-13:10</span>
+                            <span class="text-sm font-bold text-slate-700">Travel Consultant</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-indigo-900 rounded-[2rem] p-6 text-white overflow-hidden relative">
+                <h3 class="font-black mb-4 flex items-center gap-2 relative z-10"><i data-lucide="sparkles" class="w-5 h-5"></i> Jadwal Piket</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 relative z-10">
+                    <div class="bg-white/10 p-4 rounded-2xl border border-white/5">
+                        <h4 class="text-xs font-bold text-blue-300 uppercase mb-2 tracking-widest">Senin</h4>
+                        <p class="text-xs font-medium leading-relaxed opacity-80">Tidak Diketahui</p>
+                    </div>
+                    <div class="bg-white/10 p-4 rounded-2xl border border-white/5">
+                        <h4 class="text-xs font-bold text-blue-300 uppercase mb-2 tracking-widest">Selasa</h4>
+                        <p class="text-xs font-medium leading-relaxed opacity-80">Tidak Diketahui</p>
+                    </div>
+                </div>
+                <i data-lucide="trash-2" class="absolute -bottom-4 -right-4 w-24 h-24 opacity-10"></i>
+            </div>
+        </section>
+
+        <!-- Tab: Pembuat -->
+        <section id="about" class="tab-content space-y-6">
+            <div class="bg-white p-10 rounded-[2.5rem] border border-slate-100 shadow-sm text-center relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-blue-600"></div>
+                <div class="w-24 h-24 bg-slate-900 rounded-3xl mx-auto mb-6 flex items-center justify-center shadow-xl rotate-3">
+                    <i data-lucide="terminal" class="text-white w-12 h-12"></i>
+                </div>
+                <h2 class="text-1.5xl font-black text-slate-800">Immanuel Bintang Barasa </h2>
+                <p class="text-blue-600 font-extrabold text-xs uppercase tracking-[0.2em] mb-4">Lead Developer & Designer</p>
+                <p class="text-slate-500 text-sm max-w-sm mx-auto leading-relaxed">"Web ini dikembangkan secara mandiri untuk membantu digitalisasi informasi kelas X-UPW."</p>
+                
+                <div class="mt-10 flex flex-wrap justify-center gap-3">
+                    <div class="px-5 py-3 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-2">
+                        <i data-lucide="instagram" class="w-4 h-4 text-pink-500"></i>
+                        <span class="text-xs font-bold text-slate-600">@pitchpixel_</span>
+                    </div>
+                    <div class="px-5 py-3 bg-slate-50 rounded-2xl border border-slate-100 flex items-center gap-2">
+                        <i data-lucide="github" class="w-4 h-4 text-slate-800"></i>
+                        <span class="text-xs font-bold text-slate-600">Numini.github.io</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Riwayat Hidup -->
+    <div id="student-modal" class="fixed inset-0 z-[60] hidden">
+        <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onclick="closeModal()"></div>
+        <div id="modal-content" class="absolute bottom-0 left-0 right-0 bg-white rounded-t-[3rem] p-10 shadow-2xl transition-all transform translate-y-full md:relative md:max-w-xl md:mx-auto md:mt-24 md:rounded-[3rem]">
+            <div class="w-16 h-1.5 bg-slate-100 rounded-full mx-auto mb-8 md:hidden"></div>
+            
+            <div class="flex items-center gap-6 mb-10">
+                <div id="modal-icon" class="w-10 h-10 rounded-[2rem] flex items-center justify-center text-3xl font-black shadow-lg"></div>
+                <div>
+                    <h2 id="modal-name" class="text-1.0xl font-black text-slate-800 leading-tight">Nama</h2>
+                    <div class="flex items-center gap-2 mt-1">
+                        <p id="modal-role" class="text-[10px] font-black text-blue-600 uppercase tracking-widest"></p>
+                        <span class="w-1 h-1 bg-slate-200 rounded-full"></span>
+                        <p id="modal-gender-label" class="text-[10px] font-black text-slate-400 uppercase tracking-widest"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-6 custom-scroll overflow-y-auto max-h-[50vh] pr-2">
+                <div class="p-6 bg-slate-50 rounded-[2rem] border border-slate-100">
+                    <h4 class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Levensmotto (Motto Hidup)</h4>
+                    <p id="modal-bio" class="text-sm text-slate-600 leading-relaxed italic"></p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <span class="block text-[9px] font-black text-slate-400 uppercase mb-1">Domisili</span>
+                        <span id="modal-pob" class="text-sm font-bold text-slate-700"></span>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100">
+                        <span class="block text-[9px] font-black text-slate-400 uppercase mb-1">Minat / Hobi</span>
+                        <span id="modal-hobby" class="text-sm font-bold text-slate-700"></span>
+                    </div>
+                </div>
+
+                <div class="p-6 bg-blue-600 rounded-[2rem] text-white shadow-xl shadow-blue-100 relative overflow-hidden">
+                    <span class="block text-[9px] font-black text-white/50 uppercase mb-2 tracking-widest">Jabatan Eksternal</span>
+                    <div class="flex items-center gap-3">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-300 fill-yellow-300"></i>
+                        <p id="modal-extra" class="text-sm font-black"></p>
+                    </div>
+                    <i data-lucide="award" class="absolute -right-4 -bottom-4 w-20 h-20 text-white/10"></i>
+                </div>
+            </div>
+            
+            <button onclick="closeModal()" class="w-full mt-8 py-5 bg-slate-900 text-white rounded-[1.5rem] font-black text-sm uppercase tracking-widest transition-all active:scale-95 shadow-xl shadow-slate-200">Tutup Profil</button>
+        </div>
+    </div>
+
+    <script>
+        const students = [
+            { id: 1, name: "Annisa Pricilia  ", role: "Ketua Kelas", gender: "P", bio: "Bantai Bantai Kelas!", pob: "Jakarta Pusat", hobby: "Bunuh Orang", extra: "Bendahara (OSIS)", color: "bg-blue-600 text-white" },
+            { id: 2, name: "Immanuel Bintang Barasa", role: "Wakil Ketua", gender: "L", bio: "Jangan lihat dari hasilnya,tapi lihatlah dari usahanya yang keras itu🙂‍↔️", pob: "Jakarta Pusat", hobby: "Menganalisis Web", extra: "Ketua Seksi Bidang (OSIS)", color: "bg-red-500 text-white" },
+            { id: 3, name: "Malika Khanza Assura", role: "Bendahara", gender: "P", bio: "Ihh.. Syibal", pob: "Jakarta Pusat", hobby: "Gak Tau", extra: "Divisi Agama Islam (OSIS)", color: "bg-violet-600 text-white" },
+            { id: 4, name: "Holy Melati Anugrah Rumopa", role: "Bendahara", gender: "P", bio: "Gender bukanlah bagaimana seseorang terlihat di mata orang lain; melainkan apa yang kita ketahui tentang diri kita sendiri.", pob: "Jakarta Pusat", hobby: "Badminton", extra: "Divisi Agama Kristen (OSIS)", color: "bg-violet-600 text-white" },
+            { id: 5, name: "Natasya Maria Elizabeth", role: "Sekretaris", gender: "P", bio: "Pengen punya 11 Cowok!.", pob: "Jakarta Utara", hobby: "Menyanyi", extra: "Sekretaris (OSIS)", color: "bg-emerald-600 text-white" },
+            { id: 6, name: "Kenzia Tiffani", role: "Anggota", gender: "P", bio: "Sukses.", pob: "Jakarta Timur", hobby: "Menyanyi", extra: "Divisi Olahraga (OSIS)", color: "bg-emerald-600 text-white" },
+            { id: 7, name: "Angelica Nugroho", role: "Anggota", gender: "P", bio: "Gak Tau", pob: "Jakarta Utara", hobby: "Menyanyi", extra: "Ketua Osis" , color: "bg-emerald-600 text-white" },
+            { id: 8, name: "Shabira Alaika Amrico Putri", role: "Anggota", gender: "P", bio: "Gak Tau", pob: "Gak Tau", hobby: "Gak Tau", extra: "Gak Tau", color: "bg-emerald-600 text-white" }
+        ];
+
+        // Helper untuk Refresh Icon
+        function refreshIcons() {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        }
+
+        window.addEventListener('load', () => {
+            renderDashboard();
+            renderStudents();
+            refreshIcons();
+        });
+
+        function renderDashboard() {
+            document.getElementById('stat-total').innerText = students.length;
+            document.getElementById('stat-male').innerText = students.filter(s => s.gender === 'L').length;
+            document.getElementById('stat-female').innerText = students.filter(s => s.gender === 'P').length;
+        }
+
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(b => {
+                b.classList.remove('text-blue-600');
+                b.classList.add('text-slate-400');
+            });
+            document.getElementById(`btn-${tabId}`).classList.add('text-blue-600');
+            document.getElementById(`btn-${tabId}`).classList.remove('text-slate-400');
+            
+            refreshIcons();
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function renderStudents() {
+            const list = document.getElementById('student-list');
+            list.innerHTML = students.map(s => `
+                <div onclick="openModal(${s.id})" class="bg-white p-5 rounded-[2rem] border border-slate-100 flex items-center justify-between shadow-sm cursor-pointer hover:border-blue-400 transition-all active:scale-95">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 ${s.color} rounded-2xl flex items-center justify-center font-black text-xl shadow-lg">
+                            ${s.name.charAt(0)}
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-slate-800 text-sm leading-tight">${s.name}</h4>
+                            <div class="flex items-center gap-2 mt-1">
+                                <p class="text-[9px] font-black text-slate-400 uppercase tracking-tighter">${s.role}</p>
+                                <span class="w-0.5 h-0.5 bg-slate-200 rounded-full"></span>
+                                <p class="text-[9px] font-black ${s.gender === 'L' ? 'text-blue-400' : 'text-pink-400'} uppercase">${s.gender === 'L' ? 'Pria' : 'Wanita'}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-slate-50 p-2 rounded-full">
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-slate-300"></i>
+                    </div>
+                </div>
+            `).join('');
+            refreshIcons();
+        }
+
+        function openModal(id) {
+            const s = students.find(x => x.id === id);
+            document.getElementById('modal-name').innerText = s.name;
+            document.getElementById('modal-role').innerText = s.role;
+            document.getElementById('modal-bio').innerText = s.bio;
+            document.getElementById('modal-pob').innerText = s.pob;
+            document.getElementById('modal-hobby').innerText = s.hobby;
+            document.getElementById('modal-extra').innerText = s.extra;
+            document.getElementById('modal-gender-label').innerText = s.gender === 'L' ? 'Pria' : 'Wanita';
+            
+            const icon = document.getElementById('modal-icon');
+            icon.innerText = s.name.charAt(0);
+            icon.className = `w-20 h-20 rounded-[2rem] flex items-center justify-center text-3xl font-black shadow-lg ${s.color}`;
+
+            document.getElementById('student-modal').classList.remove('hidden');
+            setTimeout(() => {
+                document.getElementById('modal-content').classList.remove('translate-y-full');
+            }, 50);
+            refreshIcons();
+        }
+
+        function closeModal() {
+            document.getElementById('modal-content').classList.add('translate-y-full');
+            setTimeout(() => {
+                document.getElementById('student-modal').classList.add('hidden');
+            }, 300);
+        }
+    </script>
+</body>
+</html>
